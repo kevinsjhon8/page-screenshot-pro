@@ -1,0 +1,10 @@
+{
+  // 测试的类型检查：`tsconfig.json` 的 program 只含 src + 协议常量（它们要编译进
+  // dist），测试文件另用一个不 emit 的 program，否则 `npm run check` 看不见
+  // 测试里的类型错——而 vitest 本身**不做**类型检查，它只是把 TS 转译掉。
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "../utils/mcp-protocol.ts"]
+}

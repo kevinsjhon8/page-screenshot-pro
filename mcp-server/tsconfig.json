@@ -1,0 +1,30 @@
+{
+  // bridge 是**独立 npm 项目**：自己的 node_modules、自己的 tsc、不引扩展的
+  // 构建链（docs/mcp-implementation.md §F1）。
+  //
+  // `rootDir: ".."` 是刻意的：`utils/mcp-protocol.ts` 是工具名与错误码的
+  // 唯一真相源，扩展与 bridge 两侧都用它。复制一份进 `src/` 就是本仓库最熟的
+  // 「写一边、读另一边」形状——改了一边，另一边静默地不认。所以这里把它
+  // 一起编译，输出里保留 `mcp-server/src/` 与 `utils/` 的相对布局，
+  // `import '../utils/mcp-protocol.js'` 在 dist 里仍然指向正确的位置。
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "..",
+    "outDir": "dist",
+    "declaration": false,
+    "sourceMap": false,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  // `tests/` 不在 build 的 program 里（它们不该被编译进 dist），由
+  // `npm run check` 的 `tsc --noEmit -p tsconfig.test.json` 单独检查。
+  "include": ["src/**/*.ts", "../utils/mcp-protocol.ts"]
+}
