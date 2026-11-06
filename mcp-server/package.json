@@ -1,0 +1,51 @@
+{
+  "name": "page-screenshot-mcp",
+  "version": "0.1.1",
+  "description": "MCP bridge for Page Screenshot Pro — lets an AI client (Claude Desktop, Cursor, Claude Code) drive the Chrome extension's screenshot, OCR and PDF tools. Images never leave the machine.",
+  "type": "module",
+  "bin": { "page-screenshot-mcp": "dist/mcp-server/src/index.js" },
+  "engines": { "node": ">=20" },
+  "files": ["dist", "README.md", "LICENSE"],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "screenshot",
+    "chrome-extension",
+    "ocr",
+    "claude",
+    "cursor",
+    "full-page-screenshot",
+    "pdf"
+  ],
+  "homepage": "https://screenshotpro.agentsblockchains.com/",
+  "author": "Page Screenshot Pro <support@screenshotpro.agentsblockchains.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinsjhon8/page-screenshot-pro.git",
+    "directory": "mcp-server"
+  },
+  "bugs": {
+    "url": "https://screenshotpro.agentsblockchains.com/support/",
+    "email": "support@screenshotpro.agentsblockchains.com"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/ws": "^8",
+    "typescript": "^5.6",
+    "vitest": "^3"
+  },
+  "//overrides": "rollup 4.65+ 的 linux-x64 原生二进制在这台无 AVX2 的 Celeron 上直接 `Illegal instruction (core dumped)`——vitest 起不来，报错是一句 core dumped，不指向任何东西。根项目锁在 4.64.3（能跑），这里跟齐。rollup 只经 vite→vitest 进来，不参与 build，也不进 dist。",
+  "overrides": {
+    "rollup": "4.64.3"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "check": "tsc -p tsconfig.test.json && vitest run"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "page-screenshot-pro-mcp",
+  "private": true,
+  "version": "0.1.6",
+  "type": "module",
+  "description": "MCP bridge for Page Screenshot Pro. The publishable package lives in mcp-server/; this root manifest exists so utils/ is compiled as ESM (mcp-server/tsconfig.json uses rootDir: \"..\" to share utils/mcp-protocol.ts).",
+  "scripts": {
+    "build": "npm --prefix mcp-server run build",
+    "test": "npm --prefix mcp-server run test",
+    "check": "npm --prefix mcp-server run check"
+  }
+}
